@@ -27,10 +27,12 @@ app.get("/stats", (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'stats.html'))
 })
 
-
-
+//creating a workout
 // app.post
 
+//getting a workout
+
+//adding an exercise
 
 // server
 app.listen(PORT, () => {
