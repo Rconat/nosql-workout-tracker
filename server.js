@@ -53,10 +53,14 @@ app.get("/api/workouts", (req, res) => {
 });
 
 //adding an exercise
-app.put("/api/workouts/id:", ({ body }, res) => {
+app.put("/api/workouts/:id", ({ body, params }, res) => {
+  console.log(body)
+  console.log(params.id)
+ 
   db.Exercise.create(body)
-  .then(({ _id }) => db.Workout.findOneAndUpdate({}, { $push: { exercises: _id } }, { new: true }))
+  .then(({ params }) => db.Workout.findOneAndUpdate({ _id: params.id }, { $push: { exercises: body } }, { new: true }))
   .then(dbWorkout => {
+    console.log(dbWorkout)
     res.json(dbWorkout)
   })
   .catch(err => {
