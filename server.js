@@ -53,11 +53,9 @@ app.get("/api/workouts", (req, res) => {
 });
 
 //adding an exercise
-app.put("/api/workouts/id:", ({body}, res) => {
-  const exercise = new Exercise(body)
-
+app.put("/api/workouts/id:", ({ body }, res) => {
   db.Exercise.create(body)
-  .then(({_id}) => db.Workout.findOneAndUpdate({}, { $push: { exercises: _id } }, { new: true }))
+  .then(({ _id }) => db.Workout.findOneAndUpdate({}, { $push: { exercises: _id } }, { new: true }))
   .then(dbWorkout => {
     res.json(dbWorkout)
   })
