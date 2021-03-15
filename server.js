@@ -6,6 +6,7 @@ const path = require("path");
 const PORT = process.env.PORT || 3000;
 
 const db = require("./models");
+const { Exercise } = require("./models");
 
 const app = express();
 
@@ -53,12 +54,29 @@ app.get("/api/workouts", (req, res) => {
 
 //adding an exercise
 app.put("/api/workouts/id:", ({body}, res) => {
+  const exercise = new Exercise(body)
+
   db.Exercise.create(body)
   .then(({_id}) => db.Workout.findOneAndUpdate({}, { $push: { exercises: _id } }, { new: true }))
   .then(dbWorkout => {
     res.json(dbWorkout)
   })
   .catch(err => {
+    res.json(err)
+  })
+})
+
+//getting a workout range
+app.get("/api/workouts/range", (req, res) => {
+  db.Workout.aggregate( [
+    {
+      $addFields: {
+        totalDuration: { $sum: "$exercises.duration" }
+      }
+    }
+  ]).then(dbWorkouts => {
+    res.json(dbWorkouts)
+  }).catch(err => {
     res.json(err)
   })
 })
