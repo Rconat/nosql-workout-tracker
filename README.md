@@ -10,6 +10,7 @@ You can find the repo on [GitHub](https://github.com/Rconat/nosql-workout-tracke
 
 ![Website Layout](assets/main.png)
 ![Exercise Layout](assets/exercise.png)
+![Workout Dashboard](assets/workout-dashboard.png)
 
 ## Table of Contents
 
