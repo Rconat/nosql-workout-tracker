@@ -29,7 +29,7 @@ app.get("/stats", (req, res) => {
 })
 
 //creating a workout
-app.post("api/workout", ({body}, res) => {
+app.post("api/workouts", ({body}, res) => {
   Workout.create(body)
     .then (dbWorkout => {
       console.log(dbWorkout)
