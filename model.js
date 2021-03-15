@@ -37,8 +37,8 @@ const WorkoutSchema = new Schema({
     distance: {
         type: Number,
     }
-})
+});
 
-const Workout = model('Workout', WorkoutSchema)
+const Workout = model('Workout', WorkoutSchema);
 
-module.exports = Workout
+module.exports = Workout;
