@@ -6,6 +6,7 @@ const path = require("path");
 const PORT = process.env.PORT || 3000;
 
 const Workout = require("./model");
+const { db } = require("./model");
 
 const app = express();
 
@@ -28,11 +29,21 @@ app.get("/stats", (req, res) => {
 })
 
 //creating a workout
-// app.post
+app.post("api/workout", ({body}, res) => {
+  Workout.create(body)
+    .then (dbWorkout => {
+      console.log(dbWorkout)
+      res.json(dbWorkout)
+    })
+    .catch(err => {
+      res.json(err)
+    })
+})
 
 //getting a workout
 
 //adding an exercise
+
 
 // server
 app.listen(PORT, () => {
