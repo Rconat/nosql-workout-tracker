@@ -4,7 +4,7 @@
 
 The purpose of this application is to create a workout tracker using mongoose along side the noSQL mongo database and Express.
 
-The webpage is hosted on [Heroku](https://secure-spire-89187.herokuapp.com/).
+The webpage is hosted on [Heroku](https://hidden-oasis-85737.herokuapp.com/).
 
 You can find the repo on [GitHub](https://github.com/Rconat/nosql-workout-tracker).
 
@@ -35,7 +35,6 @@ You can find the repo on [GitHub](https://github.com/Rconat/nosql-workout-tracke
     <li>stats.js</li>
     <li>style.css</li>
     <li>workout.js</li>
-    <li>Exercise.js</li>
     <li>index.js</li>
     <li>Workout.js</li>
     <li>main.png</li>
@@ -46,7 +45,7 @@ You can find the repo on [GitHub](https://github.com/Rconat/nosql-workout-tracke
 
 ## Usage 
 
-This application lets a user track their workouts and display the progress in graphs. The user will enter data that will be stored in the mongo database to be used by the applicaton. The user will choose either a "resistance" workout or a "cardio" workout. If the user selects resistance they will enter the exercise name, weight, sets, reps, and duration. Once the user inputs they can hit the "Add Exercise" button and the data will be saved to the server. If the user selects "cardio" they will enter the name, distance, and duration which will then be stored in the server. Upon hitting the dashboard button the user will be sent to the stats page which will display necessary previous workout stats for the user. 
+This application lets a user track their workouts and display the progress in graphs. The user will enter data that will be stored in the mongo database to be used by the applicaton. The user will choose either a "resistance" workout or a "cardio" workout. If the user selects resistance they will enter the exercise name, weight, sets, reps, and duration. Once the user inputs they can hit the "Add Exercise" button and the data will be saved to the server. If the user selects "cardio" they will enter the name, distance, and duration which will then be stored in the server. Upon hitting the dashboard button the user will be sent to the stats page which will display all of the previous workout stats for the user. 
 
 ## Credits
 
