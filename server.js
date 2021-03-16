@@ -6,7 +6,6 @@ const path = require("path");
 const PORT = process.env.PORT || 3000;
 
 const db = require("./models");
-// const { Exercise } = require("./models");
 
 const app = express();
 
@@ -18,23 +17,23 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // connecting to mongoDB via heroku
-// mongoose.connect(
-//   process.env.MONGODB_URI || 'mongodb://localhost/myFirstDatabase',
-//   {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false
-//   }
-// );
-
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { 
-  useNewUrlParser: true,
-  useUnifiedTopology: true, 
-  useCreateIndex: true,
-  useFindAndModify: false
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/myFirstDatabase',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
   }
 );
+
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { 
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true, 
+//   useCreateIndex: true,
+//   useFindAndModify: false
+//   }
+// );
 
 app.get("/exercise", (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'exercise.html'))
