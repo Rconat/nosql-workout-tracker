@@ -32,8 +32,9 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
   useUnifiedTopology: true, 
   useCreateIndex: true,
-  useFindAndModify: true
-});
+  useFindAndModify: false
+  }
+);
 
 app.get("/exercise", (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'exercise.html'))
@@ -44,8 +45,10 @@ app.get("/stats", (req, res) => {
 })
 
 //creating a workout
-app.post("/api/workouts", ({ body }, res) => {
-  db.Workout.create(body)
+app.post("/api/workouts", ({body}, res) => {
+
+  const workout = new db.Workout(body)
+  db.Workout.create(workout)
     .then (dbWorkouts => {
       // console.log(dbWorkout)
       res.json(dbWorkouts)
@@ -58,10 +61,6 @@ app.post("/api/workouts", ({ body }, res) => {
 //getting a workout
 app.get("/api/workouts", (req, res) => {
   db.Workout.find({})
-  .populate("exercises")
-  // .exec((err, dbWorkout) => {
-  //   console.log("populated workouts " + dbWorkout)
-  // })
   .then(dbWorkouts => {
     console.log(dbWorkouts)
     res.json(dbWorkouts)
@@ -76,8 +75,7 @@ app.put("/api/workouts/:id", ({ body, params }, res) => {
   console.log(body)
   console.log(params.id)
  
-  db.Exercise.create(body)
-  .then(({ params }) => db.Workout.findOneAndUpdate({ _id: params.id }, { $push: { exercises: body } }, { new: true }))
+  db.Workout.findOneAndUpdate({ _id: params.id }, { $push: { exercises: body } }, { new: true })
   .then(dbWorkout => {
     res.json(dbWorkout)
   })
