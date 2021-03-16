@@ -39,6 +39,8 @@ You can find the repo on [GitHub](https://github.com/Rconat/nosql-workout-tracke
     <li>index.js</li>
     <li>Workout.js</li>
     <li>main.png</li>
+    <li>exercise.png</li>
+    <li>workout-dashboard.png</li>
 
 </ul>
 

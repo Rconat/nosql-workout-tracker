@@ -6,7 +6,7 @@ const path = require("path");
 const PORT = process.env.PORT || 3000;
 
 const db = require("./models");
-const { Exercise } = require("./models");
+// const { Exercise } = require("./models");
 
 const app = express();
 
@@ -17,8 +17,23 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
+// connecting to mongoDB via heroku
+// mongoose.connect(
+//   process.env.MONGODB_URI || 'mongodb://localhost/myFirstDatabase',
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false
+//   }
+// );
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { 
+  useNewUrlParser: true,
+  useUnifiedTopology: true, 
+  useCreateIndex: true,
+  useFindAndModify: true
+});
 
 app.get("/exercise", (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'exercise.html'))
@@ -29,11 +44,11 @@ app.get("/stats", (req, res) => {
 })
 
 //creating a workout
-app.post("/api/workouts", ({body}, res) => {
+app.post("/api/workouts", ({ body }, res) => {
   db.Workout.create(body)
-    .then (dbWorkout => {
+    .then (dbWorkouts => {
       // console.log(dbWorkout)
-      res.json(dbWorkout)
+      res.json(dbWorkouts)
     })
     .catch(err => {
       res.json(err)
@@ -44,9 +59,12 @@ app.post("/api/workouts", ({body}, res) => {
 app.get("/api/workouts", (req, res) => {
   db.Workout.find({})
   .populate("exercises")
-  .then(dbWorkout => {
-    console.log(dbWorkout)
-    res.json(dbWorkout)
+  // .exec((err, dbWorkout) => {
+  //   console.log("populated workouts " + dbWorkout)
+  // })
+  .then(dbWorkouts => {
+    console.log(dbWorkouts)
+    res.json(dbWorkouts)
   })
   .catch(err => {
     res.json(err)
