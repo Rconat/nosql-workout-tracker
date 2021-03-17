@@ -27,14 +27,6 @@ mongoose.connect(
   }
 );
 
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { 
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true, 
-//   useCreateIndex: true,
-//   useFindAndModify: false
-//   }
-// );
-
 app.get("/exercise", (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'exercise.html'))
 })
@@ -61,7 +53,6 @@ app.post("/api/workouts", ({body}, res) => {
 app.get("/api/workouts", (req, res) => {
   db.Workout.find({})
   .then(dbWorkouts => {
-    console.log(dbWorkouts)
     res.json(dbWorkouts)
   })
   .catch(err => {
@@ -71,9 +62,6 @@ app.get("/api/workouts", (req, res) => {
 
 //adding an exercise
 app.put("/api/workouts/:id", ({ body, params }, res) => {
-  console.log(body)
-  console.log(params.id)
- 
   db.Workout.findOneAndUpdate({ _id: params.id }, { $push: { exercises: body } }, { new: true })
   .then(dbWorkout => {
     res.json(dbWorkout)
